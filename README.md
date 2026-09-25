@@ -92,6 +92,10 @@ O mesmo arquivo também roda como teste Jest normal, se preferir:
 8. Convide o bot para o canal de destino (`/invite @NomeDoApp` no
    canal) e copie o ID desse canal (ex: `C0123456789`) para
    `TARGET_CHANNEL_ID`.
+9. (Opcional) Se quiser restringir o slash command `/ajuste` para
+   funcionar em apenas um canal, copie o ID desse canal (clique no
+   nome do canal → **About** → **Channel ID**, no rodapé) para
+   `ALLOWED_CHANNEL_ID`.
 
 ## Configurando variáveis de ambiente
 
@@ -107,6 +111,10 @@ Variáveis:
 - `SLACK_SIGNING_SECRET` — signing secret do app.
 - `SLACK_APP_TOKEN` — app-level token para Socket Mode (`xapp-...`).
 - `TARGET_CHANNEL_ID` — ID do canal onde os pedidos serão publicados.
+- `ALLOWED_CHANNEL_ID` — opcional. ID do único canal em que o slash
+  command `/ajuste` pode ser usado (clique no nome do canal → **About**
+  → **Channel ID**, no rodapé, para descobrir o ID). Se estiver vazio
+  ou não definido, o comando funciona em qualquer canal.
 - `PORT` — porta local usada pelo processo Bolt (padrão `3000`).
 
 ## Rodando localmente

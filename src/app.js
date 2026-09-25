@@ -11,6 +11,7 @@ require('dotenv').config();
 
 const TARGET_CHANNEL_ID = process.env.TARGET_CHANNEL_ID;
 const SLASH_COMMAND = process.env.SLASH_COMMAND || '/ajuste';
+const ALLOWED_CHANNEL_ID = process.env.ALLOWED_CHANNEL_ID;
 
 if (!TARGET_CHANNEL_ID) {
   console.warn(
@@ -52,7 +53,15 @@ function validate(values) {
   return missing;
 }
 
-app.command(SLASH_COMMAND, async ({ ack, body, client }) => {
+app.command(SLASH_COMMAND, async ({ ack, body, client, command }) => {
+  if (ALLOWED_CHANNEL_ID && command.channel_id !== ALLOWED_CHANNEL_ID) {
+    await ack({
+      response_type: 'ephemeral',
+      text: 'Este comando só pode ser usado no canal designado para ajustes.',
+    });
+    return;
+  }
+
   await ack();
 
   await client.views.open({
